@@ -81,16 +81,16 @@ export default function TomatoScene({ running, isBreak }: { running: boolean; is
 
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
     renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+    renderer.setSize(window.innerWidth, window.innerHeight);
     rendererRef.current = renderer;
 
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0xaaaaaa);
     sceneRef.current = scene;
 
-    const camera = new THREE.PerspectiveCamera(45, canvas.clientWidth / canvas.clientHeight, 0.1, 100);
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
     camera.position.set(0, 1, 22);
-    camera.lookAt(0, -2, 0);
+    camera.lookAt(0, -1, 0);
     cameraRef.current = camera;
 
     scene.add(new THREE.AmbientLight(0xffffff, 0.8));
@@ -122,8 +122,8 @@ export default function TomatoScene({ running, isBreak }: { running: boolean; is
     });
 
     const onResize = () => {
-      const w = canvas.clientWidth;
-      const h = canvas.clientHeight;
+      const w = window.innerWidth;
+      const h = window.innerHeight;
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
