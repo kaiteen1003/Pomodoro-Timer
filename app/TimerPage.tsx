@@ -173,8 +173,7 @@ export default function TimerPage() {
       <div className="relative z-20 flex flex-col items-center pb-3 sm:pb-4">
         <div className="relative flex items-center justify-center">
           <svg
-            width="min(55vw, 220px)"
-            height="min(55vw, 220px)"
+            style={{ width: "min(55vw, 220px)", height: "min(55vw, 220px)" }}
             viewBox="0 0 220 220"
           >
             <circle
