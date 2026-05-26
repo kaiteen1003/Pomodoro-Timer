@@ -167,13 +167,13 @@ export default function TimerPage() {
       </div>
 
       {/* spacer */}
-      <div className="relative z-20 h-56 sm:h-64" />
+      <div className="relative z-20 h-[35vh]" />
 
       {/* timer */}
       <div className="relative z-20 flex flex-col items-center pb-3 sm:pb-4">
         <div className="relative flex items-center justify-center">
           <svg
-            className="w-64 h-64 sm:w-72 sm:h-72"
+            className="w-72 h-72 sm:w-80 sm:h-80"
             viewBox="0 0 220 220"
           >
             <circle
@@ -229,10 +229,10 @@ export default function TimerPage() {
       </div>
 
       {/* controls */}
-      <div className="relative z-20 flex gap-3 sm:gap-4 pb-10 sm:pb-16">
+      <div className="relative z-20 flex gap-4 sm:gap-5 pb-10 sm:pb-16">
         <button
           onClick={() => setRunning((r) => !r)}
-          className={`w-24 sm:w-28 py-3 rounded-full font-semibold text-white shadow-lg transition-all active:scale-95 text-sm sm:text-base ${
+          className={`w-28 sm:w-36 py-3.5 rounded-full font-semibold text-white shadow-lg transition-all active:scale-95 text-base sm:text-lg ${
             running
               ? "bg-stone-500 hover:bg-stone-600"
               : isBreak
@@ -248,7 +248,7 @@ export default function TimerPage() {
         </button>
         <button
           onClick={reset}
-          className="w-20 sm:w-24 py-3 rounded-full font-semibold text-white bg-white/20 hover:bg-white/30 transition-all active:scale-95 text-sm sm:text-base"
+          className="w-24 sm:w-32 py-3.5 rounded-full font-semibold text-white bg-white/20 hover:bg-white/30 transition-all active:scale-95 text-base sm:text-lg"
         >
           {tx.reset}
         </button>
