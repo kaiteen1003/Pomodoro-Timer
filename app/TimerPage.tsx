@@ -172,10 +172,9 @@ export default function TimerPage() {
       {/* timer */}
       <div className="relative z-20 flex flex-col items-center pb-3 sm:pb-4">
         <div className="relative flex items-center justify-center">
-          <div className="w-[clamp(160px,55vw,220px)] h-[clamp(160px,55vw,220px)]">
           <svg
-            width="100%"
-            height="100%"
+            width="220"
+            height="220"
             viewBox="0 0 220 220"
           >
             <circle
@@ -196,7 +195,6 @@ export default function TimerPage() {
               style={{ transition: "stroke-dashoffset 1s linear" }}
             />
           </svg>
-          </div>
 
           <div className="absolute flex flex-col items-center gap-1">
             <div className="text-white/70">
