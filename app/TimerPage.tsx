@@ -13,6 +13,7 @@ export default function TimerPage() {
   const [workSecs, setWorkSecs] = useState(52 * 60);
   const [breakSecs, setBreakSecs] = useState(17 * 60);
   const [soundEnabled, setSoundEnabled] = useState(true);
+  const [soundFile, setSoundFile] = useState("/se1.mp3");
   const [notifyEnabled, setNotifyEnabled] = useState(false);
   const [autoSwitch, setAutoSwitch] = useState(true);
   const [language, setLanguage] = useState<Lang>("en");
@@ -44,9 +45,11 @@ export default function TimerPage() {
   const modeRef = useRef<Mode>("work");
   const autoSwitchRef = useRef(autoSwitch);
   const soundEnabledRef = useRef(soundEnabled);
+  const soundFileRef = useRef(soundFile);
 
   useEffect(() => { autoSwitchRef.current = autoSwitch; }, [autoSwitch]);
   useEffect(() => { soundEnabledRef.current = soundEnabled; }, [soundEnabled]);
+  useEffect(() => { soundFileRef.current = soundFile; }, [soundFile]);
 
   useEffect(() => {
     modeRef.current = mode;
@@ -62,10 +65,12 @@ export default function TimerPage() {
             const nextMode = modeRef.current === "work" ? "break" : "work";
             const nextSeconds = nextMode === "work" ? workSecs : breakSecs;
             const tx = tr(language);
-            sendNotification(
-              nextMode === "break" ? tx.breakTime : tx.focusTime,
-              nextMode === "break" ? `${tx.breakTime} — ${Math.floor(nextSeconds/60)}m` : `${tx.focusTime} — ${Math.floor(nextSeconds/60)}m`
-            );
+            const mins = Math.floor(nextSeconds / 60);
+            if (nextMode === "break") {
+              sendNotification(tx.notifyBreakTitle, tx.notifyBreakBody.replace("{min}", String(mins)));
+            } else {
+              sendNotification(tx.notifyFocusTitle, tx.notifyFocusBody);
+            }
             setRunning(false); // 一度falseにしてuseEffectを再トリガー
             setTimeout(() => {
               setMode(nextMode);
@@ -87,7 +92,8 @@ export default function TimerPage() {
 
   function playSound() {
     if (!soundEnabledRef.current) return;
-    const audio = new Audio("/notify.mp3");
+    const audio = new Audio(soundFileRef.current);
+    audio.volume = 0.7;
     audio.play().catch(() => {});
   }
 
@@ -145,7 +151,9 @@ export default function TimerPage() {
         language={language}
         onWorkSecs={(v) => { setWorkSecs(v); if (!running && mode === "work") setSeconds(v); }}
         onBreakSecs={(v) => { setBreakSecs(v); if (!running && mode === "break") setSeconds(v); }}
+        soundFile={soundFile}
         onSoundEnabled={setSoundEnabled}
+        onSoundFile={setSoundFile}
         onNotifyEnabled={requestNotifyPermission}
         onAutoSwitch={setAutoSwitch}
         onLanguage={(v) => setLanguage(v)}

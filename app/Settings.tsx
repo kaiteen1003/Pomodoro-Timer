@@ -7,18 +7,27 @@ import { LANGUAGES, Lang, t as tr, translations } from "./i18n";
 
 type Tx = typeof translations["en"];
 
+const SOUND_OPTIONS = [
+  { value: "/se1.mp3", label: "SE1" },
+  { value: "/se2.mp3", label: "SE2" },
+  { value: "/se3.mp3", label: "SE3" },
+  { value: "/se4.mp3", label: "SE4" },
+];
+
 type Props = {
   open: boolean;
   onClose: () => void;
   workSecs: number;
   breakSecs: number;
   soundEnabled: boolean;
+  soundFile: string;
   notifyEnabled: boolean;
   autoSwitch: boolean;
   language: Lang;
   onWorkSecs: (v: number) => void;
   onBreakSecs: (v: number) => void;
   onSoundEnabled: (v: boolean) => void;
+  onSoundFile: (v: string) => void;
   onNotifyEnabled: (v: boolean) => void;
   onAutoSwitch: (v: boolean) => void;
   onLanguage: (v: Lang) => void;
@@ -78,9 +87,9 @@ function fmtSecs(s: number) {
 export default function Settings({
   open, onClose,
   workSecs, breakSecs,
-  soundEnabled, notifyEnabled, autoSwitch, language,
+  soundEnabled, soundFile, notifyEnabled, autoSwitch, language,
   onWorkSecs, onBreakSecs,
-  onSoundEnabled, onNotifyEnabled, onAutoSwitch, onLanguage,
+  onSoundEnabled, onSoundFile, onNotifyEnabled, onAutoSwitch, onLanguage,
 }: Props) {
   const tx = tr(language);
 
@@ -158,23 +167,46 @@ export default function Settings({
 
           {/* Notifications */}
           <div className="flex flex-col gap-2">
-            <div className="flex items-center justify-between">
-              <span className="text-white/60 text-sm">{tx.notifications}</span>
-              <Switch.Root checked={notifyEnabled} onCheckedChange={onNotifyEnabled}
-                className="w-11 h-6 rounded-full transition-colors data-[state=checked]:bg-red-500 data-[state=unchecked]:bg-white/20 relative outline-none cursor-pointer">
-                <Switch.Thumb className="block w-4 h-4 bg-white rounded-full shadow transition-transform translate-x-1 data-[state=checked]:translate-x-6" />
-              </Switch.Root>
+            <label className="text-white/60 text-sm">{tx.notifications}</label>
+            <div className="rounded-lg bg-white/5 flex flex-col divide-y divide-white/10">
+              <div className="flex items-center justify-between px-3 py-2.5">
+                <span className="text-white/70 text-sm">{tx.sound}</span>
+                <Switch.Root checked={soundEnabled} onCheckedChange={onSoundEnabled}
+                  className="w-11 h-6 rounded-full transition-colors data-[state=checked]:bg-red-500 data-[state=unchecked]:bg-white/20 relative outline-none cursor-pointer">
+                  <Switch.Thumb className="block w-4 h-4 bg-white rounded-full shadow transition-transform translate-x-1 data-[state=checked]:translate-x-6" />
+                </Switch.Root>
+              </div>
+              {soundEnabled && (
+                <div className="flex gap-1.5 px-3 pb-3">
+                  {SOUND_OPTIONS.map((opt) => (
+                    <button
+                      key={opt.value}
+                      onClick={() => {
+                        onSoundFile(opt.value);
+                        const audio = new Audio(opt.value);
+                        audio.volume = 0.7;
+                        audio.play().catch(() => {});
+                      }}
+                      className={`flex-1 py-1.5 rounded-md text-xs font-medium transition-colors ${
+                        soundFile === opt.value
+                          ? "bg-red-500 text-white"
+                          : "bg-white/10 text-white/60 hover:bg-white/20 hover:text-white"
+                      }`}
+                    >
+                      {opt.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+              <div className="flex items-center justify-between px-3 py-2.5">
+                <span className="text-white/70 text-sm">{tx.pushNotify}</span>
+                <Switch.Root checked={notifyEnabled} onCheckedChange={onNotifyEnabled}
+                  className="w-11 h-6 rounded-full transition-colors data-[state=checked]:bg-red-500 data-[state=unchecked]:bg-white/20 relative outline-none cursor-pointer">
+                  <Switch.Thumb className="block w-4 h-4 bg-white rounded-full shadow transition-transform translate-x-1 data-[state=checked]:translate-x-6" />
+                </Switch.Root>
+              </div>
             </div>
             <NotificationHelp tx={tx} />
-          </div>
-
-          {/* Sound */}
-          <div className="flex items-center justify-between">
-            <span className="text-white/60 text-sm">{tx.sound}</span>
-            <Switch.Root checked={soundEnabled} onCheckedChange={onSoundEnabled}
-              className="w-11 h-6 rounded-full transition-colors data-[state=checked]:bg-red-500 data-[state=unchecked]:bg-white/20 relative outline-none cursor-pointer">
-              <Switch.Thumb className="block w-4 h-4 bg-white rounded-full shadow transition-transform translate-x-1 data-[state=checked]:translate-x-6" />
-            </Switch.Root>
           </div>
 
           {/* Auto switch */}
