@@ -8,6 +8,9 @@ const geist = Geist({
 });
 
 export const metadata: Metadata = {
+  verification: {
+    google: "wibE1p5nHviwBAkIhkZyoLbn80EHdwEdDNp4IlED7BY",
+  },
   title: "52/17 Timer — Focus & Break Productivity Timer",
   description: "The 52/17 productivity timer. Work focused for 52 minutes, then take a 17-minute break. Free online timer with sound alerts, auto-switch, and 20 languages.",
   keywords: ["52/17 timer", "52 17 rule", "productivity timer", "focus timer", "pomodoro alternative", "work break timer", "study timer"],
