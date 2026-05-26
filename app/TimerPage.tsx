@@ -124,7 +124,7 @@ export default function TimerPage() {
     <div className="relative flex flex-col items-center min-h-screen min-h-dvh overflow-hidden select-none">
 
       {/* 3D background */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 hidden md:block">
         <TomatoScene running={running} isBreak={isBreak} />
       </div>
 
