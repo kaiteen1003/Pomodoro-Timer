@@ -38,7 +38,7 @@ export default function TomatoScene({ running, isBreak }: { running: boolean; is
     const loader = new GLTFLoader();
     loader.load(nextFile, (gltf) => {
       const nextModel = gltf.scene;
-      nextModel.scale.setScalar(2.0);
+      nextModel.scale.setScalar(2.5);
       nextModel.position.set(0, 1.5, 0);
       nextModel.rotation.x = 0.4;
 
@@ -105,7 +105,7 @@ export default function TomatoScene({ running, isBreak }: { running: boolean; is
     let animId: number;
     loader.load("/tomato.glb", (gltf) => {
       const model = gltf.scene;
-      model.scale.setScalar(2.0);
+      model.scale.setScalar(2.5);
       model.position.set(0, 1.5, 0);
       model.rotation.x = 0.4;
       scene.add(model);
