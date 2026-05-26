@@ -167,7 +167,7 @@ export default function TimerPage() {
       </div>
 
       {/* spacer */}
-      <div className="relative z-20 flex-1" />
+      <div className="relative z-20 h-8 sm:h-12" />
 
       {/* timer */}
       <div className="relative z-20 flex flex-col items-center pb-3 sm:pb-4">
