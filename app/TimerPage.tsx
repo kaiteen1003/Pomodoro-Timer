@@ -160,14 +160,14 @@ export default function TimerPage() {
       />
 
       {/* title */}
-      <div className="relative z-20 pt-10 sm:pt-14">
+      <div className="relative z-20 pt-6 sm:pt-8">
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-widest text-white drop-shadow-lg">
           52/17
         </h1>
       </div>
 
       {/* spacer */}
-      <div className="relative z-20 h-[40vh]" />
+      <div className="relative z-20 h-[28vh]" />
 
       {/* timer */}
       <div className="relative z-20 flex flex-col items-center pb-3 sm:pb-4">
@@ -229,7 +229,7 @@ export default function TimerPage() {
       </div>
 
       {/* controls */}
-      <div className="relative z-20 flex gap-4 sm:gap-5 pb-10 sm:pb-16">
+      <div className="relative z-20 flex gap-4 sm:gap-5 pb-8 sm:pb-10">
         <button
           onClick={() => setRunning((r) => !r)}
           className={`w-28 sm:w-36 py-3.5 rounded-full font-semibold text-white shadow-lg transition-all active:scale-95 text-base sm:text-lg ${
