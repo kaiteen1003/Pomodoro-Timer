@@ -167,13 +167,13 @@ export default function TimerPage() {
       </div>
 
       {/* spacer */}
-      <div className="relative z-20 h-8 sm:h-12" />
+      <div className="relative z-20 h-56 sm:h-64" />
 
       {/* timer */}
       <div className="relative z-20 flex flex-col items-center pb-3 sm:pb-4">
         <div className="relative flex items-center justify-center">
           <svg
-            className="w-52 h-52 sm:w-64 sm:h-64"
+            className="w-64 h-64 sm:w-72 sm:h-72"
             viewBox="0 0 220 220"
           >
             <circle

@@ -90,7 +90,7 @@ export default function TomatoScene({ running, isBreak }: { running: boolean; is
 
     const camera = new THREE.PerspectiveCamera(45, canvas.clientWidth / canvas.clientHeight, 0.1, 100);
     camera.position.set(0, 1, 22);
-    camera.lookAt(0, 0, 0);
+    camera.lookAt(0, -5, 0);
     cameraRef.current = camera;
 
     scene.add(new THREE.AmbientLight(0xffffff, 0.8));
