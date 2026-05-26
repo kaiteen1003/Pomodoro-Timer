@@ -8,8 +8,19 @@ const geist = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "52/17 Timer",
-  description: "52分集中・17分休憩で生産性を最大化するタイマー",
+  title: "52/17 Timer — Focus & Break Productivity Timer",
+  description: "The 52/17 productivity timer. Work focused for 52 minutes, then take a 17-minute break. Free online timer with sound alerts, auto-switch, and 20 languages.",
+  keywords: ["52/17 timer", "52 17 rule", "productivity timer", "focus timer", "pomodoro alternative", "work break timer", "study timer"],
+  openGraph: {
+    title: "52/17 Timer — Focus & Break Productivity Timer",
+    description: "Work focused for 52 minutes, break for 17. The science-backed productivity timer.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "52/17 Timer",
+    description: "Work focused for 52 minutes, break for 17. Free productivity timer.",
+  },
 };
 
 export default function RootLayout({
