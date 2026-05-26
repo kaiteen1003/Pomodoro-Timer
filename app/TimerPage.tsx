@@ -173,8 +173,7 @@ export default function TimerPage() {
       <div className="relative z-20 flex flex-col items-center pb-3 sm:pb-4">
         <div className="relative flex items-center justify-center">
           <svg
-            width="220"
-            height="220"
+            className="w-52 h-52 sm:w-64 sm:h-64"
             viewBox="0 0 220 220"
           >
             <circle
